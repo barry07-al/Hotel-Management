@@ -1,0 +1,8 @@
+[
+  {
+    "id": "9a723af5-e0cb-4fa9-a170-896f19dd4f01",
+    "full_name": "Alpha BARRY",
+    "email": "barry@gmail.com",
+    "phone_number": "0755812315"
+  }
+]

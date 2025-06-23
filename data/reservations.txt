@@ -1,0 +1,8 @@
+[
+  {
+    "id": "db5a06ad-681b-46a9-8131-84a6a5fa9d8e",
+    "guest_id": "9a723af5-e0cb-4fa9-a170-896f19dd4f01",
+    "room_type": "SUITE",
+    "nights": 1,
+    "checkin_date": "2025-06-26",
+    "status": 
