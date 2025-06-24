@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "amount": 100.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.537307"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-24T22:20:10.537426"
+  },
+  {
+    "amount": 25.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.537461"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.537493"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-24T22:20:10.537521"
+  },
+  {
+    "amount": 25.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.537547"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.546609"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-24T22:20:10.546671"
+  },
+  {
+    "amount": 25.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.546703"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.546728"
+  },
+  {
+    "amount": 100.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-24T22:20:10.546751"
+  },
+  {
+    "amount": 25.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-24T22:20:10.546777"
+  }
+]

@@ -23,9 +23,11 @@ class BookingService:
         booking.confirm()
         self._persist()
 
-    def cancel_booking(self, booking_id: str):
+    def cancel_booking(self, booking_id: str, client_id: str):
         booking = self.repo.get_by_id(booking_id)
-        booking.cancel()
+        if not booking:
+            raise ValueError("Reservation not found.")
+        booking.cancel(client_id)
         self._persist()
 
     def _persist(self):

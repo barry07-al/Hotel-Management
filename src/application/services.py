@@ -17,24 +17,19 @@ from datetime import date
 class HotelApplicationService:
 
     def __init__(self):
-        # Repositories
         self.clients = ClientRepository()
         self.wallets = WalletRepository()
         self.payments = PaymentRepository()
         self.bookings = ReservationRepository()
         
-
-        # Services
         self.client_service = ClientService(self.clients)
         self.booking_service = BookingService(self.bookings)
 
         # Load persisted data
         for c in Persistence.load_clients():
             self.clients.save(c)
-
         for w in Persistence.load_wallets():
             self.wallets.save(w)
-
         for p in Persistence.load_transactions():
             self.payments.record(p)
 
@@ -74,7 +69,7 @@ class HotelApplicationService:
         wallet.withdraw(upfront)
         self.wallets.save(wallet)
 
-        self.payments.save(PaymentTransaction(upfront, "Booking 50% upfront"))
+        self.payments.record(PaymentTransaction(upfront, "Booking deposit"))
         self.bookings.save(booking)
         self._save_all()
         return booking
@@ -92,12 +87,12 @@ class HotelApplicationService:
         wallet.withdraw(remaining)
         self.wallets.save(wallet)
 
-        self.payments.save(PaymentTransaction(remaining, "Booking confirmation"))
+        self.payments.record(PaymentTransaction(remaining, "Booking confirmation"))
         self.booking_service.confirm_booking(booking_id)
         self._save_all()
 
-    def cancel_booking(self, booking_id: str):
-        self.booking_service.cancel_booking(booking_id)
+    def cancel_booking(self, booking_id: str, client_id: str):
+        self.booking_service.cancel_booking(booking_id, client_id)
         self._save_all()
 
     def list_clients(self):

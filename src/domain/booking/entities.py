@@ -21,7 +21,11 @@ class Reservation:
             raise ValueError("Only pending reservations can be confirmed.")
         self.status = ReservationStatus.CONFIRMED
 
-    def cancel(self):
+    def cancel(self, client_id: str):
+        if client_id != self.guest_id:
+            raise PermissionError("You are not allowed to cancel this reservation.")
         if self.status == ReservationStatus.CANCELED:
             raise ValueError("Reservation is already canceled.")
+        if self.status == ReservationStatus.CONFIRMED:
+            raise ValueError("Confirmed reservations cannot be canceled.")
         self.status = ReservationStatus.CANCELED

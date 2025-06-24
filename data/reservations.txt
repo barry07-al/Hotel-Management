@@ -1,8 +1,20 @@
 [
   {
-    "id": "db5a06ad-681b-46a9-8131-84a6a5fa9d8e",
-    "guest_id": "9a723af5-e0cb-4fa9-a170-896f19dd4f01",
-    "room_type": "SUITE",
+    "id": "51c0364c-e335-4e59-a349-dc09a208e509",
+    "guest_id": "1b0e530f-3e3e-4b36-a24d-9e90cb415b6b",
+    "room_type": "SUPERIOR",
+    "nights": 2,
+    "checkin_date": "2025-06-24T00:00:00",
+    "status": "CONFIRMED",
+    "total_price": 200.0
+  },
+  {
+    "id": "06f5330b-4211-4f0f-85a0-810a41a567be",
+    "guest_id": "1b0e530f-3e3e-4b36-a24d-9e90cb415b6b",
+    "room_type": "STANDARD",
     "nights": 1,
-    "checkin_date": "2025-06-26",
-    "status": 
+    "checkin_date": "2025-07-01T00:00:00",
+    "status": "CANCELED",
+    "total_price": 50.0
+  }
+]

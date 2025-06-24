@@ -33,7 +33,7 @@ def cli():
             elif choice == "2":
                 user_id = input("Client ID: ")
                 amount = float(input("Amount: "))
-                currency = Currency[input("Currency (EUR/USD): ").upper()]
+                currency = Currency[input("Currency (EUR/USD/GBP/JPY/CHF): ").upper()]
                 app.deposit_money(user_id, amount, currency)
                 print("💸 Deposit successful.")
 
@@ -58,13 +58,14 @@ def cli():
                 print("✅ Booking confirmed.")
 
             elif choice == "6":
+                user_id = input("Client ID: ")
                 booking_id = input("Booking ID: ")
-                app.cancel_booking(booking_id)
+                app.cancel_booking(booking_id, user_id)
                 print("❌ Booking cancelled (no refund).")
 
             elif choice == "7":
                 for c in app.list_clients():
-                    print(f"🧑 {c.full_name.first_name} {c.full_name.last_name} - {c.email.value} - ID: {c.id}")
+                    print(f"🧑 {c.full_name.first_name} {c.full_name.last_name} - {c.email.value}")
 
             elif choice == "8":
                 print("Goodbye!")
@@ -75,6 +76,3 @@ def cli():
 
         except Exception as e:
             print(f"Error: {e}")
-
-if __name__ == "__main__":
-    cli()

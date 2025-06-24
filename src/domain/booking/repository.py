@@ -10,3 +10,5 @@ class BookingRepository:
 
     def get_all(self):
         return list(self.reservations.values())
+
+        
