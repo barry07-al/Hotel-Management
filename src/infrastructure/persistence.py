@@ -31,7 +31,7 @@ class Persistence:
         with open(file_path, "w", encoding="utf-8") as f:
             data = [{
                 "id": r.id,
-                "guest_id": r.guest_id,
+                "client_id": r.client_id,
                 "room_type": r.room_type.name,
                 "nights": r.nights,
                 "checkin_date": r.checkin_date.isoformat(),
@@ -46,7 +46,7 @@ class Persistence:
         reservations = []
         for d in raw_data:
             r = Reservation(
-                guest_id=d["guest_id"],
+                client_id=d["client_id"],
                 room_type=RoomType[d["room_type"]],
                 nights=int(d["nights"]),
                 checkin_date=datetime.fromisoformat(d["checkin_date"])
@@ -91,14 +91,14 @@ class Persistence:
         ensure_data_dir()
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(
-                [{"user_id": w.user_id, "balance": w.balance} for w in wallets], f, indent=2)
+                [{"client_id": w.client_id, "balance": w.balance} for w in wallets], f, indent=2)
 
     @staticmethod
     def load_wallets(file_path=f"{DATA_DIR}/wallets.json") -> list:
         raw = read_json_file(file_path)
         wallets = []
         for w in raw:
-            wallet = Wallet(w["user_id"])
+            wallet = Wallet(w["client_id"])
             wallet.balance = w["balance"]
             wallets.append(wallet)
         return wallets

@@ -1,11 +1,9 @@
-# src/domain/wallet/entities.py
-
 from domain.wallet.value_objects import Amount
 
 class Wallet:
-    def __init__(self, user_id: str):
-        self.user_id = user_id
-        self.balance = 0.0  # in EUR
+    def __init__(self, client_id: str):
+        self.balance = 0.0
+        self.client_id = client_id
 
     def deposit(self, amount: Amount):
         if amount.value <= 0:

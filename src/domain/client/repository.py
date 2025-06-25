@@ -1,4 +1,5 @@
 from typing import Optional, List
+
 from .entities import Client
 from infrastructure.persistence import Persistence
 
@@ -9,7 +10,6 @@ class ClientRepository:
         self._storage = {client.id: client for client in Persistence.load_clients(file_path)}
 
     def save(self, client: Client):
-        # Prevent duplicate email
         existing = self.get_by_email(client.email)
         if existing and existing.id != client.id:
             raise ValueError(f"Client with email {client.email.value} already exists.")

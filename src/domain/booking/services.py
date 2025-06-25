@@ -7,13 +7,12 @@ from infrastructure.persistence import Persistence  # NEW
 class BookingService:
     def __init__(self, repo: BookingRepository):
         self.repo = repo
-        # Load existing reservations at startup
         loaded = Persistence.load_reservations()
         for r in loaded:
             self.repo.save(r)
 
-    def create_booking(self, guest_id: str, room_type: RoomType, nights: int, checkin_date: date) -> Reservation:
-        booking = Reservation(guest_id, room_type, nights, checkin_date)
+    def create_booking(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date) -> Reservation:
+        booking = Reservation(client_id, room_type, nights, checkin_date)
         self.repo.save(booking)
         self._persist()
         return booking

@@ -9,7 +9,7 @@ from domain.booking.repository import BookingRepository as ReservationRepository
 from domain.rooms.entities import RoomType
 from domain.payment.entities import PaymentTransaction
 from domain.payment.repository import PaymentRepository
-from application.exceptions import ApplicationError
+from src.application.exceptions import ApplicationError
 from infrastructure.persistence import Persistence
 
 from datetime import date
@@ -32,6 +32,12 @@ class HotelApplicationService:
             self.wallets.save(w)
         for p in Persistence.load_transactions():
             self.payments.record(p)
+    
+    def get_client_by_id(self, client_id: str):
+        client = self.clients.get_by_id(client_id)
+        if not client:
+            raise ApplicationError("Client not found.")
+        return client
 
     def create_account(self, first: str, last: str, email: str, phone: str):
         client = self.client_service.register_client(first, last, email, phone)
@@ -39,8 +45,8 @@ class HotelApplicationService:
         self._save_all()
         return client
 
-    def deposit_money(self, user_id: str, value: float, currency: Currency):
-        wallet = self.wallets.get_by_user_id(user_id)
+    def deposit_money(self, client_id: str, value: float, currency: Currency):
+        wallet = self.wallets.get_by_client_id(client_id)
         if not wallet:
             raise ApplicationError("Wallet not found.")
 
@@ -49,18 +55,18 @@ class HotelApplicationService:
         self.wallets.save(wallet)
         self._save_all()
 
-    def get_balance(self, user_id: str) -> float:
-        wallet = self.wallets.get_by_user_id(user_id)
+    def get_balance(self, client_id: str) -> float:
+        wallet = self.wallets.get_by_client_id(client_id)
         if not wallet:
             raise ApplicationError("Wallet not found.")
         return wallet.get_balance()
 
-    def book_room(self, user_id: str, room_type: RoomType, nights: int, checkin_date: date):
-        wallet = self.wallets.get_by_user_id(user_id)
+    def book_room(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date):
+        wallet = self.wallets.get_by_client_id(client_id)
         if not wallet:
             raise ApplicationError("Wallet not found.")
 
-        booking = self.booking_service.create_booking(user_id, room_type, nights, checkin_date)
+        booking = self.booking_service.create_booking(client_id, room_type, nights, checkin_date)
         upfront = booking.total_price * 0.5
 
         if wallet.get_balance() < upfront:
@@ -74,8 +80,8 @@ class HotelApplicationService:
         self._save_all()
         return booking
 
-    def confirm_booking(self, user_id: str, booking_id: str, total_price: float):
-        wallet = self.wallets.get_by_user_id(user_id)
+    def confirm_booking(self, client_id: str, booking_id: str, total_price: float):
+        wallet = self.wallets.get_by_client_id(client_id)
         if not wallet:
             raise ApplicationError("Wallet not found.")
 

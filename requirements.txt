@@ -7,3 +7,4 @@ alembic==1.13.1
 python-multipart==0.0.9
 babel==2.14.0
 pytest==8.2.1
+forex-python==1.9.2
