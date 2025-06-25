@@ -2,7 +2,7 @@ import sys
 
 from datetime import date
 
-from logger import logger
+from src.logger.logger import logger
 from domain.rooms.entities import RoomType
 from domain.currency.value_objects import Currency
 from application.services import HotelApplicationService
