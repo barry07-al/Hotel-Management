@@ -1,5 +1,5 @@
 from domain.booking.repository import BookingRepository
-from .entities import Reservation
+from .entities import Booking
 from domain.rooms.entities import RoomType
 from datetime import date
 from infrastructure.persistence import Persistence  # NEW
@@ -11,8 +11,8 @@ class BookingService:
         for r in loaded:
             self.repo.save(r)
 
-    def create_booking(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date) -> Reservation:
-        booking = Reservation(client_id, room_type, nights, checkin_date)
+    def create_booking(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date) -> Booking:
+        booking = Booking(client_id, room_type, nights, checkin_date)
         self.repo.save(booking)
         self._persist()
         return booking
@@ -25,7 +25,7 @@ class BookingService:
     def cancel_booking(self, booking_id: str, client_id: str):
         booking = self.repo.get_by_id(booking_id)
         if not booking:
-            raise ValueError("Reservation not found.")
+            raise ValueError(f"Booking {booking_id} not found.")
         booking.cancel(client_id)
         self._persist()
 

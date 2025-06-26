@@ -80,12 +80,17 @@ class HotelApplicationService:
         self._save_all()
         return booking
 
-    def confirm_booking(self, client_id: str, booking_id: str, total_price: float):
+    def confirm_booking(self, client_id: str, booking_id: str):
         wallet = self.wallets.get_by_client_id(client_id)
         if not wallet:
             raise ApplicationError("Wallet not found.")
 
-        remaining = total_price * 0.5
+
+        booking = self.bookings.get_by_id(booking_id)
+        if not booking:
+            raise ApplicationError(f"Booking {booking_id} not found.")
+        
+        remaining = booking.total_price * 0.5
 
         if wallet.get_balance() < remaining:
             raise ApplicationError("Insufficient funds to confirm.")

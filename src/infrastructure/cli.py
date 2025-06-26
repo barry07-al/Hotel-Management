@@ -39,10 +39,18 @@ class CLI:
                     except Exception as e:
                         logger.error(f"Error creating client: {e}")
                 elif choice == "2":
-                    client_id = input("Client ID: ")
-                    amount = float(input("Amount: "))
-                    currency = Currency[input("Currency (EUR/USD/GBP/JPY/CHF): ").upper()]
                     try:
+                        try:
+                            amount = float(input("Amount: "))
+                        except ValueError:
+                            logger.error("Invalid amount. Please enter a valid number.")
+                            continue
+                        try:
+                            currency = Currency[input("Currency (EUR/USD/GBP/JPY/CHF): ").upper()]
+                        except KeyError:
+                            logger.error("Invalid currency. Please enter a valid currency.")
+                            continue
+                        client_id = input("Client ID: ")
                         self.app.deposit_money(client_id, amount, currency)
                         logger.info("💸 Deposit successful.")
                     except Exception as e:
@@ -69,9 +77,23 @@ class CLI:
                 elif choice == "5":
                     try:
                         client_id = input("Client ID: ")
-                        room = RoomType[input("Room type (STANDARD, SUPERIOR, SUITE): ").upper()]
-                        nights = int(input("Nights: "))
-                        checkin = date.fromisoformat(input("Check-in date (YYYY-MM-DD): "))
+                        try:
+                            room = RoomType[input("Room type (STANDARD, SUPERIOR, SUITE): ").upper()]
+                        except KeyError:
+                            logger.error("Invalid room type. Please enter a valid room type.")
+                            continue
+                        try:
+                            nights = int(input("Nights: "))
+                            if nights <= 0:
+                                raise ValueError("Number of nights must be greater than 0.")
+                        except ValueError:
+                            logger.error("Invalid number of nights. Please enter a valid integer.")
+                            continue
+                        try:
+                            checkin = date.fromisoformat(input("Check-in date (YYYY-MM-DD): "))
+                        except ValueError:
+                            logger.error("Invalid date format. Please enter a valid date in YYYY-MM-DD format.")
+                            continue
                         booking = self.app.book_room(client_id, room, nights, checkin)
                         logger.info(f"🏨 Booking created. ID: {booking.id}, Total: {booking.total_price:.2f} EUR")
                     except Exception as e:
@@ -80,8 +102,7 @@ class CLI:
                     try:
                         client_id = input("Client ID: ")
                         booking_id = input("Booking ID: ")
-                        total = float(input("Total Price: "))
-                        self.app.confirm_booking(client_id, booking_id, total)
+                        self.app.confirm_booking(client_id, booking_id)
                         logger.info(f"✅ Booking {booking_id} confirmed.")
                     except Exception as e:
                         logger.error(f"Error confirmation booking: {e}")

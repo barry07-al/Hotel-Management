@@ -2,8 +2,8 @@ import json
 import os
 from domain.client.entities import Client
 from domain.wallet.entities import Wallet
-from domain.booking.entities import Reservation
-from domain.booking.value_objects import ReservationStatus
+from domain.booking.entities import Booking
+from domain.booking.value_objects import BookingStatus
 from domain.rooms.entities import RoomType
 from domain.payment.entities import PaymentTransaction
 from datetime import datetime
@@ -45,14 +45,14 @@ class Persistence:
         raw_data = read_json_file(file_path)
         reservations = []
         for d in raw_data:
-            r = Reservation(
+            r = Booking(
                 client_id=d["client_id"],
                 room_type=RoomType[d["room_type"]],
                 nights=int(d["nights"]),
                 checkin_date=datetime.fromisoformat(d["checkin_date"])
             )
             r.id = d["id"]
-            r.status = ReservationStatus[d["status"]]
+            r.status = BookingStatus[d["status"]]
             r.total_price = float(d["total_price"])
             reservations.append(r)
         return reservations

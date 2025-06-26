@@ -1,6 +1,6 @@
 from enum import Enum
 
-class ReservationStatus(Enum):
+class BookingStatus(Enum):
     PENDING = "pending"
     CONFIRMED = "confirmed"
     CANCELED = "canceled"

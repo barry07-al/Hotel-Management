@@ -10,12 +10,14 @@ class FullName:
 
 class Email:
     def __init__(self, value: str):
-        if "@" not in value:
+        # use gmail regex for validation
+        import re
+        if not re.match(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$", value):
             raise ValueError("Invalid email address.")
         self.value = value
 
 class PhoneNumber:
     def __init__(self, value: str):
-        if len(value) < 10:
+        if not value.isdigit() or len(value) < 10 or len(value) > 15:
             raise ValueError("Invalid phone number.")
         self.value = value
