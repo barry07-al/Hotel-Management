@@ -10,7 +10,6 @@ class FullName:
 
 class Email:
     def __init__(self, value: str):
-        # use gmail regex for validation
         import re
         if not re.match(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$", value):
             raise ValueError("Invalid email address.")

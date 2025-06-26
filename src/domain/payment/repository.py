@@ -1,5 +1,3 @@
-# domain/payment/repository.py
-
 from domain.payment.entities import PaymentTransaction
 from infrastructure.persistence import Persistence
 

@@ -1,11 +1,11 @@
-import pytest
 import sys
+import pytest
+
 from pathlib import Path
-
-# Add the src directory to the Python path
-sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
-
 from unittest.mock import MagicMock
+
+
+sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
 
 from src.domain.wallet.entities import Wallet
 from src.domain.client.entities import Client

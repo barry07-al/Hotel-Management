@@ -25,7 +25,6 @@ class HotelApplicationService:
         self.client_service = ClientService(self.clients)
         self.booking_service = BookingService(self.bookings)
 
-        # Load persisted data
         for c in Persistence.load_clients():
             self.clients.save(c)
         for w in Persistence.load_wallets():

@@ -2,7 +2,7 @@ from domain.booking.repository import BookingRepository
 from .entities import Booking
 from domain.rooms.entities import RoomType
 from datetime import date
-from infrastructure.persistence import Persistence  # NEW
+from infrastructure.persistence import Persistence
 
 class BookingService:
     def __init__(self, repo: BookingRepository):

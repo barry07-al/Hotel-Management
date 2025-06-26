@@ -51,13 +51,11 @@ def hotel_service():
 
     return service
 
-
 @pytest.fixture
 def client(hotel_service):
     client = Client(FullName("John", "Doe"), Email("john@example.com"), PhoneNumber("0123456789"))
     hotel_service.clients.save(client)
     return client
-
 
 @pytest.fixture
 def wallet(hotel_service, client):
@@ -65,24 +63,20 @@ def wallet(hotel_service, client):
     hotel_service.wallets.save(wallet)
     return wallet
 
-
 def test_create_account_success(hotel_service):
     client = hotel_service.create_account("Alice", "Smith", "alice@example.com", "9876543210")
     assert client.full_name.first_name == "Alice"
     assert client.email.value == "alice@example.com"
     assert hotel_service.wallets.get_by_client_id(client.id) is not None
 
-
 def test_deposit_money_success(hotel_service, client, wallet):
     hotel_service.deposit_money(client.id, 100.0, Currency.EUR)
     w = hotel_service.wallets.get_by_client_id(client.id)
     assert w.get_balance() == 100.0
 
-
 def test_deposit_money_insufficient_wallet(hotel_service):
     with pytest.raises(Exception, match="Wallet not found"):
         hotel_service.deposit_money("unknown", 50.0, Currency.EUR)
-
 
 def test_get_balance_success(hotel_service, client, wallet):
     wallet.deposit(Amount(50.0, Currency.EUR))
@@ -90,11 +84,9 @@ def test_get_balance_success(hotel_service, client, wallet):
     balance = hotel_service.get_balance(client.id)
     assert balance == 50.0
 
-
 def test_get_balance_wallet_not_found(hotel_service):
     with pytest.raises(Exception, match="Wallet not found"):
         hotel_service.get_balance("unknown")
-
 
 @patch("src.application.services.BookingService.create_booking")
 def test_book_room_success(mock_create_booking, hotel_service, client, wallet):
@@ -109,7 +101,7 @@ def test_book_room_success(mock_create_booking, hotel_service, client, wallet):
     booking = hotel_service.book_room(client.id, RoomType.SUPERIOR, 2, date.today())
 
     assert booking.total_price == 200.0
-    assert wallet.get_balance() == 400.0  # 50% paid
+    assert wallet.get_balance() == 400.0
 
 @patch("src.application.services.BookingService.create_booking")
 def test_book_room_insufficient_funds(mock_create_booking, hotel_service, client, wallet):
