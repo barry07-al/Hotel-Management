@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug tests with pytest",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "pytest",
+        "justMyCode": false,
+        "args": [
+          "tests",              // Dossier de tests
+          "-v",                 // Mode verbeux
+          "--maxfail=1",        // Arrête au premier échec (optionnel)
+          "--disable-warnings" // Ignore les warnings pour plus de clarté
+        ],
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  

@@ -1,16 +1,20 @@
+from domain.wallet.entities import Wallet
+from domain.rooms.entities import RoomType
+from domain.wallet.value_objects import Amount
 from domain.client.services import ClientService
+from infrastructure.persistence import Persistence
+from domain.booking.services import BookingService
+from domain.currency.value_objects import Currency
+from application.exceptions import ApplicationError
 from domain.client.repository import ClientRepository
 from domain.wallet.repository import WalletRepository
-from domain.wallet.entities import Wallet
-from domain.wallet.value_objects import Amount
-from domain.currency.value_objects import Currency
-from domain.booking.services import BookingService
-from domain.booking.repository import BookingRepository as ReservationRepository
-from domain.rooms.entities import RoomType
 from domain.payment.entities import PaymentTransaction
 from domain.payment.repository import PaymentRepository
-from src.application.exceptions import ApplicationError
-from infrastructure.persistence import Persistence
+from domain.booking.repository import BookingRepository 
+
+
+
+
 
 from datetime import date
 
@@ -20,7 +24,7 @@ class HotelApplicationService:
         self.clients = ClientRepository()
         self.wallets = WalletRepository()
         self.payments = PaymentRepository()
-        self.bookings = ReservationRepository()
+        self.bookings = BookingRepository()
         
         self.client_service = ClientService(self.clients)
         self.booking_service = BookingService(self.bookings)
@@ -35,7 +39,7 @@ class HotelApplicationService:
     def get_client_by_id(self, client_id: str):
         client = self.clients.get_by_id(client_id)
         if not client:
-            raise ApplicationError("Client not found.")
+            raise ApplicationError(f"Client {client_id} not exists.")
         return client
 
     def create_account(self, first: str, last: str, email: str, phone: str):
@@ -46,9 +50,6 @@ class HotelApplicationService:
 
     def deposit_money(self, client_id: str, value: float, currency: Currency):
         wallet = self.wallets.get_by_client_id(client_id)
-        if not wallet:
-            raise ApplicationError("Wallet not found.")
-
         amount = Amount(value, currency)
         wallet.deposit(amount)
         self.wallets.save(wallet)
@@ -56,15 +57,10 @@ class HotelApplicationService:
 
     def get_balance(self, client_id: str) -> float:
         wallet = self.wallets.get_by_client_id(client_id)
-        if not wallet:
-            raise ApplicationError("Wallet not found.")
         return wallet.get_balance()
 
     def book_room(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date):
         wallet = self.wallets.get_by_client_id(client_id)
-        if not wallet:
-            raise ApplicationError("Wallet not found.")
-
         booking = self.booking_service.create_booking(client_id, room_type, nights, checkin_date)
         upfront = booking.total_price * 0.5
 
@@ -81,13 +77,9 @@ class HotelApplicationService:
 
     def confirm_booking(self, client_id: str, booking_id: str):
         wallet = self.wallets.get_by_client_id(client_id)
-        if not wallet:
-            raise ApplicationError("Wallet not found.")
-
-
         booking = self.bookings.get_by_id(booking_id)
         if not booking:
-            raise ApplicationError(f"Booking {booking_id} not found.")
+            raise ApplicationError(f"Booking {booking_id} not exists.")
         
         remaining = booking.total_price * 0.5
 
@@ -104,9 +96,6 @@ class HotelApplicationService:
     def cancel_booking(self, booking_id: str, client_id: str):
         self.booking_service.cancel_booking(booking_id, client_id)
         self._save_all()
-
-    def list_clients(self):
-        return self.clients.get_all()
 
     def _save_all(self):
         Persistence.save_clients(self.clients.get_all())

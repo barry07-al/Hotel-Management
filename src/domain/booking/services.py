@@ -1,10 +1,13 @@
-from domain.booking.repository import BookingRepository
+from datetime import date
+
 from .entities import Booking
 from domain.rooms.entities import RoomType
-from datetime import date
 from infrastructure.persistence import Persistence
+from application.exceptions import ApplicationError
+from domain.booking.repository import BookingRepository
 
 class BookingService:
+
     def __init__(self, repo: BookingRepository):
         self.repo = repo
         loaded = Persistence.load_reservations()
@@ -25,7 +28,7 @@ class BookingService:
     def cancel_booking(self, booking_id: str, client_id: str):
         booking = self.repo.get_by_id(booking_id)
         if not booking:
-            raise ValueError(f"Booking {booking_id} not found.")
+            raise ApplicationError(f"Booking {booking_id} not found.")
         booking.cancel(client_id)
         self._persist()
 

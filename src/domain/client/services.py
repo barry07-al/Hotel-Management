@@ -1,6 +1,8 @@
 from .entities import Client
 from .repository import ClientRepository
+from application.exceptions import ApplicationError
 from .value_objects import FullName, Email, PhoneNumber
+
 
 
 class ClientService:
@@ -13,7 +15,7 @@ class ClientService:
         email_vo = Email(email)
         phone_vo = PhoneNumber(phone_number)
         if self.repository.get_by_email(email_vo):
-            raise ValueError("A client with this email already exists.")
+            raise ApplicationError("A client with this email already exists.")
         client = Client(full_name=full_name_vo, email=email_vo, phone_number=phone_vo)
         self.repository.save(client)
         return client

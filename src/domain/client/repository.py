@@ -2,6 +2,7 @@ from typing import Optional, List
 
 from .entities import Client
 from infrastructure.persistence import Persistence
+from application.exceptions import ApplicationError
 
 class ClientRepository:
 
@@ -12,7 +13,7 @@ class ClientRepository:
     def save(self, client: Client):
         existing = self.get_by_email(client.email)
         if existing and existing.id != client.id:
-            raise ValueError(f"Client with email {client.email.value} already exists.")
+            raise ApplicationError(f"Client with email {client.email.value} already exists.")
         self._storage[client.id] = client
         self._persist()
 

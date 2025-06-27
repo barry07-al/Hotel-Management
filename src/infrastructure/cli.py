@@ -84,8 +84,6 @@ class CLI:
                             continue
                         try:
                             nights = int(input("Nights: "))
-                            if nights <= 0:
-                                raise ValueError("Number of nights must be greater than 0.")
                         except ValueError:
                             logger.error("Invalid number of nights. Please enter a valid integer.")
                             continue

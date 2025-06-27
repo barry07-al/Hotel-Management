@@ -1,4 +1,5 @@
 from domain.currency.value_objects import Currency
+from application.exceptions import ApplicationError
 
 class Amount:
     exchange_rates = {
@@ -11,15 +12,12 @@ class Amount:
 
     def __init__(self, value: float, currency: Currency):
         if value <= 0:
-            raise ValueError("Amount must be positive.")
+            raise ApplicationError("Amount must be positive.")
         if currency not in self.exchange_rates:
-            raise ValueError(f"Unsupported currency: {currency}")
+            raise ApplicationError(f"Unsupported currency: {currency}")
         self.value = value
         self.currency = currency
 
     def to_euro(self) -> 'Amount':
         euro_value = self.value * self.exchange_rates[self.currency]
         return Amount(euro_value, Currency.EUR)
-
-    def __repr__(self):
-        return f"{self.value:.2f} {self.currency.name}"
