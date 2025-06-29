@@ -1,7 +1,7 @@
 
 import logging
 
-logger = logging.getLogger("XYZ Hotel Management System")
+logger = logging.getLogger("XYZ Hotel cli")
 logger.setLevel(logging.DEBUG)
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)

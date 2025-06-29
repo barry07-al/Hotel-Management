@@ -16,6 +16,7 @@ from src.application.exceptions import ApplicationError
 from src.application.services import HotelApplicationService
 from src.domain.client.value_objects import FullName, Email, PhoneNumber
 
+
 @pytest.fixture(autouse=True)
 def mock_persistence():
     with patch("src.application.services.Persistence.load_clients", return_value=[]), \
@@ -98,4 +99,3 @@ def client_id():
 @pytest.fixture
 def booking_id():
     return "booking-123"
-

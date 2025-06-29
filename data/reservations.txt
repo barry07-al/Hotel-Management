@@ -1,0 +1,20 @@
+[
+  {
+    "id": "284c1825-c8f8-4927-a001-e1cef71778a2",
+    "client_id": "28202970-5013-4fa9-8080-93779ce42262",
+    "room_type": "STANDARD",
+    "nights": 1,
+    "checkin_date": "2025-06-30",
+    "status": "CONFIRMED",
+    "total_price": 50
+  },
+  {
+    "id": "ca352b82-4d9e-4bbe-93bf-75cdc7f15960",
+    "client_id": "28202970-5013-4fa9-8080-93779ce42262",
+    "room_type": "SUPERIOR",
+    "nights": 1,
+    "checkin_date": "2025-07-25",
+    "status": "CONFIRMED",
+    "total_price": 100
+  }
+]

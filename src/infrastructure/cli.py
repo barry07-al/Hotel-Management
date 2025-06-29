@@ -9,6 +9,7 @@ from application.services import HotelApplicationService
 
 
 class CLI:
+
     def __init__(self):
         self.app = HotelApplicationService()
 

@@ -1,10 +1,10 @@
-import pytest, re
+import pytest
 
 from datetime import date
 from unittest.mock import MagicMock
 
 from src.domain.rooms.entities import RoomType
-from src.application.exceptions import ApplicationError
+
 
 def test_create_booking(booking_service, mock_booking_repository, client_id):
     nights = 2

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "28202970-5013-4fa9-8080-93779ce42262",
+    "full_name": "Alpha BARRY",
+    "email": "barry@gmail.com",
+    "phone_number": "0652134879"
+  }
+]

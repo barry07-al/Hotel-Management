@@ -2,10 +2,11 @@ import pytest
 
 from unittest.mock import MagicMock
 
+from src.domain.wallet.entities import Wallet
 from src.domain.wallet.services import WalletService
 from src.application.exceptions import ApplicationError
 from src.domain.wallet.value_objects import Amount, Currency
-from src.domain.wallet.entities import Wallet
+
 
 @pytest.fixture
 def mock_wallet():

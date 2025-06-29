@@ -2,6 +2,7 @@ from domain.currency.value_objects import Currency
 from application.exceptions import ApplicationError
 
 class Amount:
+
     exchange_rates = {
         Currency.EUR: 1.0,
         Currency.USD: 0.93,

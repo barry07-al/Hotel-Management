@@ -1,6 +1,9 @@
 import uuid
-from .value_objects import FullName, Email, PhoneNumber
+
 from dataclasses import dataclass, field
+
+from .value_objects import FullName, Email, PhoneNumber
+
 
 @dataclass
 class Client:

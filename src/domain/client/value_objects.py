@@ -1,6 +1,7 @@
 from application.exceptions import ApplicationError
 
 class FullName:
+
     def __init__(self, first_name: str, last_name: str):
         if not first_name or not last_name:
             raise ApplicationError("Both first and last names are required.")

@@ -3,7 +3,6 @@ import pytest
 from unittest.mock import MagicMock
 
 from src.domain.client.entities import Client
-from src.application.exceptions import ApplicationError
 
 
 def test_register_client_success(mock_client_repository, client_service):

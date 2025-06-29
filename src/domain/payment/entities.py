@@ -1,4 +1,5 @@
 import uuid
+
 from datetime import datetime
 
 from application.exceptions import ApplicationError

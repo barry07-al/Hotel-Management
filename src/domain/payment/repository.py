@@ -1,5 +1,5 @@
-from domain.payment.entities import PaymentTransaction
 from infrastructure.persistence import Persistence
+from domain.payment.entities import PaymentTransaction
 
 class PaymentRepository:
     def __init__(self):

@@ -1,14 +1,16 @@
 import uuid
+
 from datetime import date
+
 from domain.rooms.entities import RoomType
 from application.exceptions import ApplicationError
 from domain.booking.value_objects import BookingStatus
 
 class Booking:
+
     def __init__(self, client_id: str, room_type: RoomType, nights: int, checkin_date: date):
         if nights <= 0:
             raise ApplicationError("Nights must be a positive integer.")
-
         self.id = str(uuid.uuid4())
         self.client_id = client_id
         self.room_type = room_type

@@ -1,0 +1,22 @@
+[
+  {
+    "amount": 25.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-29T21:31:16.796096"
+  },
+  {
+    "amount": 25.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-29T21:32:10.324159"
+  },
+  {
+    "amount": 50.0,
+    "description": "Booking deposit",
+    "timestamp": "2025-06-29T21:33:29.478045"
+  },
+  {
+    "amount": 50.0,
+    "description": "Booking confirmation",
+    "timestamp": "2025-06-29T21:33:50.969946"
+  }
+]

@@ -4,7 +4,6 @@ from application.exceptions import ApplicationError
 from .value_objects import FullName, Email, PhoneNumber
 
 
-
 class ClientService:
 
     def __init__(self, repository: ClientRepository):
