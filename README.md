@@ -54,7 +54,7 @@ Le contexte "Hotel" dépend de "Booking" pour récupérer les réservations et l
 | Wallet     | Wallet           | wallet_id | Portefeuille pour les paiements |
 | Hotel      | Hotel |             | Lieu associé à une réservation   |
 | PaymentTransaction    | Payments (optionnel)|       | Détail d’une transaction         |
-| RoomType    | Payments (optionnel)|       | Détail d’une transaction         |
+| RoomType    | Booking|       | Type de chambre à louer         |
 
 ### Value Objects
 
