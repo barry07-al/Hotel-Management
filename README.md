@@ -50,20 +50,22 @@ Le contexte "Hotel" dépend de "Booking" pour récupérer les réservations et l
 | Entité     | Contexte         | Identité clé         | Description                      |
 |------------|------------------|----------------------|----------------------------------|
 | Booking    | Booking          | booking_id           | Représente une réservation       |
-| Client     | Client           | client_id ou email   | Un utilisateur du système        |
-| Wallet     | Wallet           | wallet_id ou client_id| Portefeuille pour les paiements |
-| Hotel      | Hotel (optionnel)| hotel_id             | Lieu associé à une réservation   |
-| Payment    | Payments (optionnel)| payment_id       | Détail d’une transaction         |
+| Client     | Client           | client_id/email   | Un utilisateur du système        |
+| Wallet     | Wallet           | wallet_id | Portefeuille pour les paiements |
+| Hotel      | Hotel |             | Lieu associé à une réservation   |
+| PaymentTransaction    | Payments (optionnel)|       | Détail d’une transaction         |
+| RoomType    | Payments (optionnel)|       | Détail d’une transaction         |
 
 ### Value Objects
 
 | Value Object | Utilisé dans     | Description                             |
 |--------------|------------------|-----------------------------------------|
-| Email        | Client           | Adresse e-mail avec validation          |
+| Email        | Client           | Adresse e-mail du client          |
 | PhoneNumber  | Client           | Numéro de téléphone du client           |
-| FullName     | Client           | Prénom et nom regroupés                 |
-| BookingDate  | Booking          | Date de réservation (si applicable)     |
-| Money        | Wallet/Payment   | Montant avec devise (si implémenté)     |
+| FullName     | Client           | Prénom et nom                  |
+| BookingStatus  | Booking          | Statut de la reservation    |
+| Currency        |  Amount  | Devise     |
+| Amount        |  Wallet  | Montant avec devise     |
 
 
 ## Structure du projet
@@ -151,11 +153,6 @@ python3 run_cli.py
 ```
 
 ## Éxécuter les tests
-```sh
-pytest
-```
-Ou pour plus de détails
-
 ```sh
 pytest -v
 ```

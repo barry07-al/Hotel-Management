@@ -1,3 +1,5 @@
+import re
+
 from application.exceptions import ApplicationError
 
 class FullName:
@@ -13,7 +15,6 @@ class FullName:
 
 class Email:
     def __init__(self, value: str):
-        import re
         if not re.match(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$", value):
             raise ApplicationError("Invalid email address.")
         self.value = value

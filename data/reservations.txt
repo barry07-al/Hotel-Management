@@ -4,17 +4,44 @@
     "client_id": "28202970-5013-4fa9-8080-93779ce42262",
     "room_type": "STANDARD",
     "nights": 1,
-    "checkin_date": "2025-06-30",
+    "checkin_date": "2025-06-30T00:00:00",
     "status": "CONFIRMED",
-    "total_price": 50
+    "total_price": 50.0
   },
   {
     "id": "ca352b82-4d9e-4bbe-93bf-75cdc7f15960",
     "client_id": "28202970-5013-4fa9-8080-93779ce42262",
     "room_type": "SUPERIOR",
     "nights": 1,
-    "checkin_date": "2025-07-25",
+    "checkin_date": "2025-07-25T00:00:00",
     "status": "CONFIRMED",
-    "total_price": 100
+    "total_price": 100.0
+  },
+  {
+    "id": "5a161639-06fc-4f71-9c81-957d9ac44028",
+    "client_id": "28202970-5013-4fa9-8080-93779ce42262",
+    "room_type": "SUITE",
+    "nights": 1,
+    "checkin_date": "2025-08-12T00:00:00",
+    "status": "PENDING",
+    "total_price": 200.0
+  },
+  {
+    "id": "46696ac4-c4ca-4b64-a519-e4e31b2ab5d3",
+    "client_id": "28202970-5013-4fa9-8080-93779ce42262",
+    "room_type": "SUITE",
+    "nights": 1,
+    "checkin_date": "2025-07-01",
+    "status": "CONFIRMED",
+    "total_price": 200
+  },
+  {
+    "id": "d0220a07-d24a-44d7-8f26-044440dc582c",
+    "client_id": "28202970-5013-4fa9-8080-93779ce42262",
+    "room_type": "STANDARD",
+    "nights": 1,
+    "checkin_date": "2025-10-02",
+    "status": "CANCELED",
+    "total_price": 50
   }
 ]
